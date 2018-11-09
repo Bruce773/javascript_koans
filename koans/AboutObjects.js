@@ -8,12 +8,12 @@ describe("About Objects", function () {
     });
 
     it("should confirm objects are collections of properties", function () {
-      expect(meglomaniac.mastermind).toBe(FILL_ME_IN);
+      expect(meglomaniac.mastermind).toBe('Joker');
     }); 
 
     it("should confirm that properties are case sensitive", function () {
-      expect(meglomaniac.henchwoman).toBe(FILL_ME_IN);
-      expect(meglomaniac.henchWoman).toBe(FILL_ME_IN);
+      expect(meglomaniac.henchwoman).toBe('Harley');
+      expect(meglomaniac.henchWoman).toBe(undefined);
     });
   });
   
@@ -23,13 +23,13 @@ describe("About Objects", function () {
       mastermind : "Brain", 
       henchman: "Pinky",
       battleCry: function (noOfBrains) {
-        return "They are " + this.henchman + " and the" +
-          Array(noOfBrains + 1).join(" " + this.mastermind);
+        return "They are " + this.henchman + " and the" + //They are Pinky and the 5
+          Array(noOfBrains + 1).join(" " + this.mastermind);  //WHy is it 4 brains?
       }
     };
    
     var battleCry = meglomaniac.battleCry(4);
-    expect(FILL_ME_IN).toMatch(battleCry);
+    expect("They are Pinky and the Brain Brain Brain Brain").toMatch(battleCry);
   });
 
   it("should confirm that when a function is attached to an object, 'this' refers to the object", function () {
@@ -44,8 +44,8 @@ describe("About Objects", function () {
       }
     };
    
-    expect(currentYear).toBe(FILL_ME_IN);
-    expect(meglomaniac.calculateAge()).toBe(FILL_ME_IN);
+    expect(currentYear).toBe(2018);
+    expect(meglomaniac.calculateAge()).toBe(48);
   });
 
   describe("'in' keyword", function () {
