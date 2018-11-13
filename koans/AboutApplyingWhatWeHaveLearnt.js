@@ -40,7 +40,7 @@ describe("About Applying What We Have Learnt", function() {
     var productsICanEat = [];
 
     var productsICanEat = _(products).filter(function (item){
-      return item.containsNuts === false && any(ingredients) !== 'mushrooms';
+      return item.containsNuts === false && item.ingredients.includes('mushrooms') === false;
     });
     //Iterate over product, if any 
       /* solve using filter() & all() / any() */
@@ -50,7 +50,7 @@ describe("About Applying What We Have Learnt", function() {
       // })
     //filter return (!anynuts or mushrooms)
 
-      expect(productsICanEat.length).toBe(2);
+      expect(productsICanEat.length).toBe(1);
   });
 
   /*********************************************************************************/
@@ -64,14 +64,19 @@ describe("About Applying What We Have Learnt", function() {
       }
     }
     
-    expect(sum).toBe(FILL_ME_IN);
+    expect(sum).toBe(233168);
   });
 
   it("should add all the natural numbers below 1000 that are multiples of 3 or 5 (functional)", function () {
 
-    var sum = FILL_ME_IN;    /* try chaining range() and reduce() */
+    var sum = 0;
+    _.range(1, 1000).reduce(function(item, num){
+      if (num % 3 === 0 || num % 5 === 0) {
+        sum += num;
+      }
+    }, sum);    /* try chaining range() and reduce() */
 
-    expect(233168).toBe(FILL_ME_IN);
+    expect(233168).toBe(sum);
   });
 
   /*********************************************************************************/
@@ -84,15 +89,33 @@ describe("About Applying What We Have Learnt", function() {
         }
     }
 
-    expect(ingredientCount['mushrooms']).toBe(FILL_ME_IN);
+    expect(ingredientCount['mushrooms']).toBe(2);
   });
 
   it("should count the ingredient occurrence (functional)", function () {
-    var ingredientCount = { "{ingredient name}": 0 };
+    // var ingredientCount = { "{ingredient name}": 0 };
+    var ingredientCount = function (foodItem){
+      // var arr = [];
+      _.chain(products.ingredients)
+          .map(function(item){return item;})
+          .flatten();
+          .reduce(function(num, element){ 
+        /*
+          Produce a new array w/ map() that holds the ingredients in products.ingredients and flatten it. 
+          Iterate over that array w/ reduce and only add the ingredient to the new array if 
+          it is our selected foodItem. Return the length of the new array to get the number
+          of selected foodItems in the list of ingredients.
+        */
+        if(element === foodItem){
+          return element;
+        }
+      })
+    }.value();
 
+    console.log(ingredientCount);
     /* chain() together map(), flatten() and reduce() */
 
-    expect(ingredientCount['mushrooms']).toBe(FILL_ME_IN);
+    expect(ingredientCount['mushrooms']).toBe(ingredientCount);
   });
 
   /*********************************************************************************/
