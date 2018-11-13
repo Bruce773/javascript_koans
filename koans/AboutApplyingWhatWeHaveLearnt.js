@@ -93,29 +93,23 @@ describe("About Applying What We Have Learnt", function() {
   });
 
   it("should count the ingredient occurrence (functional)", function () {
-    // var ingredientCount = { "{ingredient name}": 0 };
-    var ingredientCount = function (foodItem){
-      // var arr = [];
-      _.chain(products.ingredients)
-          .map(function(item){return item;})
-          .flatten();
-          .reduce(function(num, element){ 
-        /*
-          Produce a new array w/ map() that holds the ingredients in products.ingredients and flatten it. 
-          Iterate over that array w/ reduce and only add the ingredient to the new array if 
-          it is our selected foodItem. Return the length of the new array to get the number
-          of selected foodItems in the list of ingredients.
-        */
-        if(element === foodItem){
-          return element;
-        }
-      })
-    }.value();
-
-    console.log(ingredientCount);
     /* chain() together map(), flatten() and reduce() */
-
-    expect(ingredientCount['mushrooms']).toBe(ingredientCount);
+    var ingredientCount = function (foodItem){
+      var i = 0;
+      return(_.chain(products)
+        .map(function(item){return item.ingredients;})
+        .flatten()
+        .reduce(function(accumu, item){ 
+            if(item === foodItem){
+              i += 1;
+              accumu = i;
+            }
+          return accumu;
+        }, 0)
+        .value())
+    }
+    console.log(ingredientCount('mushrooms'));
+    expect(ingredientCount('mushrooms')).toBe(2);
   });
 
   /*********************************************************************************/
